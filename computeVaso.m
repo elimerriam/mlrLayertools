@@ -73,6 +73,12 @@ for iScan = 1:nScans
   for iFrame = 1:dims(4);
     vaso(:,iFrame) = nulledUp(:,iFrame) ./ boldUp(:,iFrame);
   end
+  
+  % clip unrealistic values
+  vaso(find(vaso<0)) = 0;
+  vaso(isnan(vaso))  = 0;
+  vaso(find(vaso>5)) = 5;
+  
   vaso = reshape(vaso, dims(1), dims(2), dims(3), dims(4));
   boldUp = reshape(boldUp, dims(1), dims(2), dims(3), dims(4));
 
