@@ -41,10 +41,10 @@ for iScan = 1:nScans
     [Nx Ny Nz Nt] = size(bold);
     % upsample bold (forward for half of a TR)
     [xgrid,ygrid,zgrid,tgrid] = ndgrid(1:Nx, 1:Ny, 1:Nz, 1:0.5:Nt+0.5);
-    boldUp = interpn(bold, xgrid, ygrid, zgrid, tgrid, 'linear');
+    boldUp = interpn(bold, xgrid, ygrid, zgrid, tgrid, 'pchip');
     % upsample nulled (backward for half of a TR)
     [xgrid,ygrid,zgrid,tgrid] = ndgrid(1:Nx, 1:Ny, 1:Nz, 0.5:0.5:Nt);
-    nulledUp = interpn(nulled, xgrid, ygrid, zgrid, tgrid, 'linear');
+    nulledUp = interpn(nulled, xgrid, ygrid, zgrid, tgrid, 'pchip');
   else
     disp('Nulled images before BOLD');
     % subset the correct frames
@@ -56,10 +56,10 @@ for iScan = 1:nScans
     [Nx Ny Nz Nt] = size(bold);
     % upsample nulled (forward for half of a TR)
     [xgrid,ygrid,zgrid,tgrid] = ndgrid(1:Nx, 1:Ny, 1:Nz, 1:0.5:Nt+0.5);
-    nulledUp = interpn(nulled, xgrid, ygrid, zgrid, tgrid, 'linear');
+    nulledUp = interpn(nulled, xgrid, ygrid, zgrid, tgrid, 'pchip');
     % upsample bold (backward for half of a TR)
     [xgrid,ygrid,zgrid,tgrid] = ndgrid(1:Nx, 1:Ny, 1:Nz, 0.5:0.5:Nt);
-    boldUp = interpn(bold, xgrid, ygrid, zgrid, tgrid, 'linear');
+    boldUp = interpn(bold, xgrid, ygrid, zgrid, tgrid, 'pchip');
   end    
   
   % compute vaso
