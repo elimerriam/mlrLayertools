@@ -28,7 +28,7 @@ for iScan = 1:nScans
   tSeries = loadTSeries(v, iScan);
   hdr = viewGet(v, 'niftihdr', iScan);
   
-  boldfirst = [];
+  boldfirst = 1;
   
   if boldfirst
     disp('BOLD before nulled');
