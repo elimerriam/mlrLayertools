@@ -5,7 +5,7 @@
 %       date: 04/22/20
 %    purpose:
 %
-function retval = computeVasoDiffRuns(getMLRView, nulledScanNum, boldScanNum)
+function retval = computeVasoDiffRuns(v, nulledScanNum, boldScanNum)
 
 % check arguments
 if ~any(nargin == [3])
