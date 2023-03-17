@@ -31,13 +31,13 @@ scanParams = viewGet(v, 'scanparams', boldScanNum);
 % original size
 [Nx Ny Nz Nt] = size(bold);
 
-% upsample vaso (forward for half of a TR)
+% upsample vnulledaso (forward for half of a TR)
 [xgrid,ygrid,zgrid,tgrid] = ndgrid(1:Nx, 1:Ny, 1:Nz, 1:0.5:Nt+0.5);
+% upsample nulled 
 nulledUp = interpn(nulled, xgrid, ygrid, zgrid, tgrid, 'linear');
-
-% upsample bold (backward for half of a TR)
-[xgrid,ygrid,zgrid,tgrid] = ndgrid(1:Nx, 1:Ny, 1:Nz, 0.5:0.5:Nt);
+% upsample bold
 boldUp = interpn(bold, xgrid, ygrid, zgrid, tgrid, 'linear');
+boldUp = cat(4, boldUp(:,:,:,1), boldUp(:,:,:,end-1));
 
 % compute vaso
 dims = size(boldUp);
